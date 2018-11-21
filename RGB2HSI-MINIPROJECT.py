@@ -20,9 +20,9 @@ def RGB2HSI(R, G, B):
 
             numer = float(0.5 * ((r - g) + (r - b)))
             denom = float(((r - g) ** 2 + ((r - b) * (g - b))) ** 0.5)  # when uplifting you can use ** as well!
-            if b <= g:
+            if (b <= g):
                 h = math.acos(numer / (denom + eps))  # to not divide with 0  !
-            if b > g:
+            if (b > g):
                 h = (2 * math.pi) - math.acos(numer / (denom + eps))
                 # h=h/360
 
@@ -41,9 +41,8 @@ def RGB2HSI(R, G, B):
 
     return H, S, I
 
-
 # Loads image
-image = cv2.imread('fruits.jpg')
+image = cv2.imread('pyramid.png')
 IMG = image / 255
 
 #  Loading each dimension of the R, G and B space.
@@ -58,14 +57,22 @@ hue, saturation, intensity = RGB2HSI(r, g, b)
 IMG_swap = np.stack([intensity, saturation, hue], axis=2)
 
 # showing the three different outputs
-#cv2.imshow('hue', hue)
-#cv2.imshow('saturation', saturation) # they are shown in one dimensional space and therefore as a default in greyscale.
-#cv2.imshow('intensity', intensity)
-#cv2.imshow('merged', IMG_swap)
-#cv2.imshow('org. image', IMG)  # original input
-
-plt.imshow(hue)
+# cv2.imshow('hue', hue)
+# cv2.imshow('saturation', saturation)  # they are shown in one dimensional space and therefore as a default in greyscale.
+# cv2.imshow('intensity', intensity)
+cv2.imshow('merged', IMG_swap)
+cv2.imshow('org. image', IMG)  # original input
 
 cv2.waitKey(0)
 
 cv2.destroyAllWindows()
+
+# Showing each output with colors
+
+plt.imshow(hue)
+plt.show()
+plt.imshow(saturation)
+plt.show()
+plt.imshow(intensity)
+
+plt.show()
